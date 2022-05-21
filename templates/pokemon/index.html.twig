@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+{% block title %}Pokedex{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+
+
+    <link href="{{ asset('/node_modules/pokemon-assets') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/style/app.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+    <h1 style="text-align:center; font-family: 'Comic Sans MS'">Pokedex</h1>
+    <a href="{{ path('app_pokemon_new') }}" style="margin: 0 20px">Créer un nouveau Pokémon</a>
+    <a href="{{ path('app_dresseur_index') }}" style="margin: 0 20px">Voir les dresseurs</a>
+    <a href="{{ path('app_equipe_index') }}" style="margin: 0 20px">Voir les équipes</a>
+    <table class="table"
+           style="font-family: 'Comic Sans MS';background: #e0e0e0;box-shadow:  20px 20px 60px #bebebe, -20px -20px 60px #ffffff;">
+        <thead>
+        <tr>
+            <th>Génération</th>
+            <th>Nom</th>
+            <th>Type 1</th>
+            <th>Type 2</th>
+            <th>Poids</th>
+            <th>Sprite</th>
+            <th>Sprite shiny</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for pokemon in pokemon %}
+            <tr style="background-color: rgba(0,0,0,0.1);">
+                <td style="text-align:center">{{ pokemon | generation }}</td>
+                <td style="text-align:center"><a href="/pokemon/{{ pokemon.id }}">{{ pokemon.nom }}</a></td>
+                <td style="text-align:center">
+                    <img src="{{ pokemon | type1 }}" alt="{{ pokemon.type1 }}" title="{{ pokemon.type1 }}"/>
+                </td>
+                <td style="text-align:center"><img src="{{ pokemon | type2 }}" alt="{{ pokemon.type2 }}" title="{{ pokemon.type2 }}"/></td>
+                <td style="text-align:center">{{ pokemon.poids }}kg</td>
+                <td style="text-align:center">
+                    <img src="{{ pokemon.sprite }}" alt="{{ pokemon.nom }}" style="max-width: 35%"/>
+                </td>
+                {% if pokemon.shinysprite != '' %}
+                    <td style="text-align:center">
+                        <img src="{{ pokemon.shinysprite }}" alt="{{ pokemon.nom }}" style="max-width: 35%"/>
+                    </td>
+                {% endif %}
+
+                <td style="text-align:center">{{ pokemon.description }}</td>
+                <td style="text-align:center">
+                    <a href="{{ path('app_pokemon_show', {'id': pokemon.id}) }}">👀 Voir</a>
+                    <br>
+                    <a href="{{ path('app_pokemon_edit', {'id': pokemon.id}) }}">⚙️ Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_pokemon_new') }}">Créer un nouveau Pokémon</a>
+    <a href="{{ path('app_dresseur_index') }}">Voir les dresseurs</a>
+    <a href="{{ path('app_equipe_index') }}">Voir les équipes</a>
+
+{% endblock %}

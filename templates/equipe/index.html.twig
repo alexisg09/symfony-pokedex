@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipe index{% endblock %}
+
+{% block body %}
+    <h1>Equipe index</h1>
+    <a href="{{ path('app_pokemon_index') }}" style="margin: 0 20px">Voir les Pokémon</a>
+    <a href="{{ path('app_dresseur_index') }}" style="margin: 0 20px">Voir les dresseurs</a>
+    <table>
+        <thead>
+        <tr>
+            <th>N°</th>
+            <th>Nom du dresseur</th>
+            <th>Nombre de badge</th>
+            <th>Pokémon</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for equipe in equipes %}
+            <tr>
+                <td style="text-align:center">{{ equipe.id }}</td>
+                <td style="text-align:center">{{ equipe.dresseur }}</td>
+                <td style="text-align:center">{{ equipe.dresseur.nbBadge }}</td>
+                <td style="text-align:center"><img src="{{ equipe.pokemon_1.sprite }}" alt="{{ equipe.pokemon_1 }}"/>
+                <td/>
+                <td style="text-align:center"><img src="{{ equipe.pokemon_2.sprite }}" alt="{{ equipe.pokemon_2 }}"/>
+                <td/>
+                <td style="text-align:center"><img src="{{ equipe.pokemon_3.sprite }}" alt="{{ equipe.pokemon_3 }}"/>
+                <td/>
+                <td style="text-align:center"><img src="{{ equipe.pokemon_4.sprite }}" alt="{{ equipe.pokemon_4 }}"/>
+                <td/>
+                <td style="text-align:center"><img src="{{ equipe.pokemon_5.sprite }}" alt="{{ equipe.pokemon_5 }}"/>
+                <td/>
+                <td style="text-align:center"><img src="{{ equipe.pokemon_6.sprite }}" alt="{{ equipe.pokemon_6 }}"/>
+                <td/>
+                <td style="text-align:center">
+                    <a href="{{ path('app_equipe_show', {'id': equipe.id}) }}">Détails</a>
+                    <a href="{{ path('app_equipe_edit', {'id': equipe.id}) }}">Modifier</a>
+                </td>
+            </tr>
+            <br>
+            <br>
+            <br>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_equipe_new') }}">Créer nouvelle équipe</a>
+{% endblock %}

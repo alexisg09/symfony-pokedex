@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Dresseur{% endblock %}
+
+{% block body %}
+    <h1>Create new Dresseur</h1>
+    <a href="{{ path('app_dresseur_index') }}" style="margin: 0 20px">Voir les dresseurs</a>
+
+    {{ include('dresseur/_form.html.twig') }}
+
+    <a href="{{ path('app_dresseur_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pokemon{% endblock %}
+
+{% block body %}
+    <h1>Pokemon</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>N°</th>
+            <td>{{ pokemon.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ pokemon.nom }}</td>
+        </tr>
+        <tr>
+            <th>Type_1</th>
+            <td><img src="{{ pokemon | type1 }}" alt="{{ pokemon.type1 }}" title="{{ pokemon.type1 }}"/>
+            </td>
+        </tr>
+        <tr>
+            <th>Type_2</th>
+            {% if pokemon.type2 == '' %}
+                <td>
+                    Aucun
+                </td>
+            {% endif %}
+            {% if pokemon.type2 != '' %}
+                <td><img src="{{ pokemon | type2 }}" alt="{{ pokemon.type2 }}" title="{{ pokemon.type2 }}"/></td>
+
+            {% endif %}
+        </tr>
+        <tr>
+            <th>Poids</th>
+            <td>{{ pokemon.poids }}kg</td>
+        </tr>
+        <th>Sprite</th>
+        <td><img src="{{ pokemon.sprite }}" alt="{{ pokemon.nom }}" style="width: 40%"/></td>
+        </tr>
+        <tr>
+            <th>Sprite shiny</th>
+            <td><img src="{{ pokemon.shinysprite }}" alt="{{ pokemon.nom }}" style="width: 40%"/></td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ pokemon.description }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_pokemon_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('app_pokemon_edit', {'id': pokemon.id}) }}">Modifier ce Pokémon</a>
+
+    {{ include('pokemon/_delete_form.html.twig') }}
+{% endblock %}

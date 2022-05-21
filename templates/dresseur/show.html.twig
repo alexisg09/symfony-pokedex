@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dresseur{% endblock %}
+
+{% block body %}
+    <h1>Dresseur</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ dresseur.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ dresseur.nom }}</td>
+        </tr>
+        <tr>
+            <th>Age</th>
+            <td>{{ dresseur.age }}</td>
+        </tr>
+        <tr>
+            <th>Nb_badge</th>
+            <td>{{ dresseur.nbBadge }}</td>
+        </tr>
+        {% for equipe in dresseur.equipe %}
+            <tr>
+                <th>Equipes</th>
+                <td><img src="{{ equipe.pokemon_1.sprite }}" alt="{{ equipe.pokemon_1.nom }}"/></td>
+                <td><img src="{{ equipe.pokemon_2.sprite }}" alt="{{ equipe.pokemon_2.nom }}"/></td>
+                <td><img src="{{ equipe.pokemon_3.sprite }}" alt="{{ equipe.pokemon_3.nom }}"/></td>
+                <td><img src="{{ equipe.pokemon_4.sprite }}" alt="{{ equipe.pokemon_4.nom }}"/></td>
+                <td><img src="{{ equipe.pokemon_5.sprite }}" alt="{{ equipe.pokemon_5.nom }}"/></td>
+                <td><img src="{{ equipe.pokemon_6.sprite }}" alt="{{ equipe.pokemon_6.nom }}"/></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Pas d'équipe</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_dresseur_index') }}">back to list</a>
+
+    <a href="{{ path('app_dresseur_edit', {'id': dresseur.id}) }}">edit</a>
+
+    {{ include('dresseur/_delete_form.html.twig') }}
+{% endblock %}
